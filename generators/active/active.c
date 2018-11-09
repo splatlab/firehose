@@ -20,7 +20,7 @@ udp_throw_t *udpt = NULL;
 
 #define DEFAULT_PORT 55555    // default port to write to
 #define STOPRATE 100          // per sec rate of STOP packets
-#define NACTIVE 131072        // size of active set
+/*#define NACTIVE 131072        // size of active set*/
 #define MAX_DISTRO 65536
 #define TREND_POINTS 1024
 #define CNT_TARGET 24
@@ -31,6 +31,7 @@ unsigned int vseed = 98765;        // RN seed for generating values
 
 // defaults for command-line switches
 
+int NACTIVE = 131072;
 uint64_t npacket = 1000000;
 int perpacket = 50;
 int rate = 0;
@@ -105,7 +106,7 @@ void read_cmd_options(int argc, char ** argv)
   register int op;
   char * filename = NULL;
 
-  while ( (op = getopt(argc, argv, "n:b:r:p:x:s:m:F:")) != EOF) {
+  while ( (op = getopt(argc, argv, "n:b:r:p:x:s:m:F:a:")) != EOF) {
     switch (op) {
     case 'n':
       npacket = strtoul(optarg,NULL,0);
@@ -130,6 +131,9 @@ void read_cmd_options(int argc, char ** argv)
       break;
     case 'F':
       filename = optarg;
+      break;
+    case 'a':
+      NACTIVE = atoi(optarg);
       break;
     }
   }
