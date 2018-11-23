@@ -446,7 +446,7 @@ int main(int argc, char **argv)
   // allows receivers to shut down cleanly, even if behind
 
   int offset = snprintf(buf,buflen,"%d\n",whichgen);
-	int cnt = 50;
+	int cnt = 100;
   while (cnt > 0) {
     udp_throw_data(udpt,buf,offset);
     usleep(1000000/STOPRATE);
